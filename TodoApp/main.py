@@ -1,6 +1,6 @@
+# encoding=utf8
 import sys
 import os
-
 
 
 def UsageInfo():
@@ -21,21 +21,20 @@ def ToDoList():
         tasks= open('List_tasks.txt', 'r').readlines()
         filesize = os.path.getsize("List_tasks.txt")
         if filesize == 0:
-            print("No todos for today! :)")
+         print("No todos for today! :)")
         else:
             print("$ todo -l" "\n")
-            check ="√"
+            check = "√"
             for task in tasks:
                 if check in task:
                     task = task.replace(check, "")
-                    print(str(count) + " _ " + "[X]" + task)
+                    print(str(count) + " _ " + "[X] " + task)
                     count += 1
                 else:
-                    print(str(count) + " _ " + "[]" + task)
+                    print(str(count) + " _ " + "[ ] " + task)
                     count += 1
     else:
         MissingIndex()
-
 
 def MissingIndex():
     if sys.argv[1] == "-a":
@@ -48,20 +47,22 @@ def MissingIndex():
         print("Unsupported argument")
         UsageInfo()
 
-
 def addToList():
         value = str (sys.argv[2])
         contents = open('List_tasks.txt', 'r').readlines()
         filesize = os.path.getsize("List_tasks.txt")
         if filesize == 0:
             contents.append(value)
+            AddTask = open("List_tasks.txt", "w")
+            contents = "".join(contents)
+            AddTask.write(contents)
+            AddTask.close()
         else:
          contents.append("\n" + value)
          AddTask = open("List_tasks.txt", "w")
          contents = "".join(contents)
          AddTask.write(contents)
          AddTask.close()
-
 
 def removeTask():
  try:
